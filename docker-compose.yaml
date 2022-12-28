@@ -1,0 +1,13 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+  keycloak:
+    image: ghcr.io/radiorabe/keycloak:latest
+    build: .
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    environment:
+      KC_DB_URL: jdbc:postgresql://db:5432/keycloak
+      KC_HOSTNAME: localhost
