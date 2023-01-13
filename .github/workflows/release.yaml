@@ -75,6 +75,7 @@ jobs:
           format: 'sarif'
           ignore-unfixed: true
           output: 'trivy-results.sarif'
+          timeout: '10m0s'
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
