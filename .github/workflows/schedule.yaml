@@ -10,4 +10,4 @@ jobs:
     uses: radiorabe/actions/.github/workflows/schedule-trivy.yaml@main
     with:
       image-ref: 'ghcr.io/radiorabe/keycloak:latest'
-      timeout: '10m0s'
+      timeout: '20m0s'
