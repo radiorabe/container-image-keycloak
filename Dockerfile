@@ -1,10 +1,9 @@
+FROM ghcr.io/radiorabe/ubi9-minimal:0.2.2 as downloader
+
 # Theme version, see https://github.com/radiorabe/keycloak-theme-rabe/releases
 ARG THEME_VERSION=0.3.0
 
-
-FROM ghcr.io/radiorabe/ubi9-minimal:0.2.2 as downloader
-
-RUN curl -L -o /keycloak-theme-rabe-$THEME_VERSION.jar \
+RUN curl -L -o /keycloak-theme-rabe.jar \
         https://github.com/radiorabe/keycloak-theme-rabe/releases/download/v$THEME_VERSION/keycloak-theme-rabe.jar
 
 
@@ -19,7 +18,7 @@ ENV KC_DB=postgres
 
 WORKDIR /opt/keycloak
 
-COPY --from=downloader /keycloak-theme-rabe-$THEME_VERSION.jar /opt/keycloak/providers/
+COPY --from=downloader /keycloak-theme-rabe.jar /opt/keycloak/providers/
 RUN /opt/keycloak/bin/kc.sh build
 
 
