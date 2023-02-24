@@ -17,7 +17,7 @@ RUN    curl -L -o providers/keycloak-theme-rabe-$THEME_VERSION.jar \
     && /opt/keycloak/bin/kc.sh build
 
 
-FROM ghcr.io/radiorabe/ubi8-minimal:1.0.3
+FROM ghcr.io/radiorabe/ubi8-minimal:1.0.4
 
 # from https://github.com/keycloak/keycloak/blob/main/quarkus/container/Dockerfile#L25-L35
 RUN    microdnf install -y \
