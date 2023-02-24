@@ -1,4 +1,4 @@
-FROM quay.io/keycloak/keycloak:20.0.3-0 as builder
+FROM quay.io/keycloak/keycloak:21.0.0-0 as builder
 
 # Theme version, see https://github.com/radiorabe/keycloak-theme-rabe/releases
 ARG THEME_VERSION=0.3.0
