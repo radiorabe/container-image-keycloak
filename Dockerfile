@@ -1,7 +1,14 @@
-FROM quay.io/keycloak/keycloak:21.0.0-0 as builder
-
 # Theme version, see https://github.com/radiorabe/keycloak-theme-rabe/releases
 ARG THEME_VERSION=0.3.0
+
+
+FROM ghcr.io/radiorabe/ubi9-minimal:0.2.2 as downloader
+
+RUN curl -L -o /keycloak-theme-rabe-$THEME_VERSION.jar \
+        https://github.com/radiorabe/keycloak-theme-rabe/releases/download/v$THEME_VERSION/keycloak-theme-rabe.jar
+
+
+FROM quay.io/keycloak/keycloak:21.0.0-0 as builder
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true
@@ -12,16 +19,8 @@ ENV KC_DB=postgres
 
 WORKDIR /opt/keycloak
 
-# install curl so we can download our theme
-USER 0
-RUN    microdnf install -y \
-           curl \
-    && microdnf clean all
-USER 1000
-
-RUN    curl -L -o providers/keycloak-theme-rabe-$THEME_VERSION.jar \
-           https://github.com/radiorabe/keycloak-theme-rabe/releases/download/v$THEME_VERSION/keycloak-theme-rabe.jar \
-    && /opt/keycloak/bin/kc.sh build
+COPY --from=downloader /keycloak-theme-rabe-$THEME_VERSION.jar /opt/keycloak/providers/
+RUN /opt/keycloak/bin/kc.sh build
 
 
 FROM ghcr.io/radiorabe/ubi9-minimal:0.2.2
