@@ -12,10 +12,14 @@ ENV KC_DB=postgres
 
 WORKDIR /opt/keycloak
 
+# install curl so we can download our theme
+USER 0
 RUN    microdnf install -y \
            curl \
-    && microdnf clean all \
-    && curl -L -o providers/keycloak-theme-rabe-$THEME_VERSION.jar \
+    && microdnf clean all
+USER 1000
+
+RUN    curl -L -o providers/keycloak-theme-rabe-$THEME_VERSION.jar \
            https://github.com/radiorabe/keycloak-theme-rabe/releases/download/v$THEME_VERSION/keycloak-theme-rabe.jar \
     && /opt/keycloak/bin/kc.sh build
 
