@@ -1,24 +1,13 @@
-name: Run semantic-release
+name: Semantic Release
 
 on:
-  pull_request:
   push:
     branches:
       - main
+      - release/*
 
 jobs:
   semantic-release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Run go-semantic-release
-        id: semrel
-        uses: go-semantic-release/action@v1
-        with:
-          github-token: ${{ secrets.RABE_ITREAKTION_GITHUB_TOKEN }}
-          allow-initial-development-versions: true
-        if: ${{ github.ref == 'refs/heads/main' }}
+    uses: radiorabe/actions/.github/workflows/semantic-release.yaml@v0.35.1
+    secrets:
+      RABE_ITREAKTION_GITHUB_TOKEN: ${{ secrets.RABE_ITREAKTION_GITHUB_TOKEN }}
