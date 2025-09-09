@@ -16,7 +16,8 @@ jobs:
       name: keycloak
       display-name: RaBe Keycloak
       tags: rhel9 keycloak rabe
-      cosign-verify: false # TODO: set to true once we are on kc26?
+      # needs proper multi-stage support of signed keycloak images
+      cosign-verify: false
       platforms: "linux/amd64,linux/arm64"
       docker-daemon-config: |
         {
