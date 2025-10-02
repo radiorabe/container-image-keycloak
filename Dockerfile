@@ -1,10 +1,10 @@
-FROM quay.io/keycloak/keycloak:26.3.5-0 AS upstream
+FROM quay.io/keycloak/keycloak:26.4.0-0 AS upstream
 FROM ghcr.io/radiorabe/ubi9-minimal:0.10.1 AS builder
 
 COPY --from=upstream /opt/keycloak /opt/keycloak
 
 # Theme version, see https://github.com/radiorabe/keycloak-theme-rabe/releases
-ARG THEME_VERSION=0.4.2
+ARG THEME_VERSION=0.4.3
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true
