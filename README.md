@@ -1,8 +1,8 @@
 # Container Image: RaBe Keycloak
 
-Our [Keycloak](https://keycloak.org) container image include the [rabe-keycloak-theme](https://github.com/radiorabe/keycloak-theme-rabet ) and the included keycloak is augmented for our use-case.
+Our [Keycloak](https://keycloak.org) container image includes the [rabe-keycloak-theme](https://github.com/radiorabe/keycloak-theme-rabe) and the installation is augmented for our use-case.
 
-The final image is based on the [RaBe Universal Base Image 8 Minimal](https://github.com/radiorabe/container-image-ubi8-minimal).
+The final image is a distroless style image built with the [RaBe Universal Base Image 8 Minimal](https://github.com/radiorabe/container-image-ubi8-minimal) base image.
 
 ## Usage
 
