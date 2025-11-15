@@ -15,15 +15,17 @@ ENV KC_DB=postgres
 
 WORKDIR /opt/keycloak
 
-RUN    microdnf install -y \
-           java-21-openjdk-headless \
-    && microdnf clean all \
-    && curl -L -o providers/keycloak-theme-rabe-$THEME_VERSION.jar \
-           https://github.com/radiorabe/keycloak-theme-rabe/releases/download/v$THEME_VERSION/keycloak-theme-rabe.jar \
-    && /opt/keycloak/bin/kc.sh build
+RUN <<EOR
+    set -xe
+    microdnf install -y \
+           java-21-openjdk-headless
+    microdnf clean all
+    curl -L -o providers/keycloak-theme-rabe-$THEME_VERSION.jar \
+           https://github.com/radiorabe/keycloak-theme-rabe/releases/download/v$THEME_VERSION/keycloak-theme-rabe.jar
+    /opt/keycloak/bin/kc.sh build
 
-RUN    mkdir -p /mnt/rootfs \
-    && microdnf install -y \
+    mkdir -p /mnt/rootfs
+    microdnf install -y \
            --releasever 9 \
            --installroot /mnt/rootfs \
            --nodocs \
@@ -34,19 +36,20 @@ RUN    mkdir -p /mnt/rootfs \
            --setopt reposdir=/etc/yum.repos.d \
            --setopt varsdir=/etc/yum.repos.d \
            glibc-langpack-en \
-           java-21-openjdk-headless \
-    && echo "keycloak:x:0:root" >> /mnt/rootfs/etc/group \
-    && echo "keycloak:x:1000:0:keycloak user:/opt/keycloak:/sbin/nologin" >> /mnt/rootfs/etc/passwd \
-    && cp \
+           java-21-openjdk-headless
+    echo "keycloak:x:0:root" >> /mnt/rootfs/etc/group
+    echo "keycloak:x:1000:0:keycloak user:/opt/keycloak:/sbin/nologin" >> /mnt/rootfs/etc/passwd
+    cp \
        /etc/pki/ca-trust/source/anchors/rabe-ca.crt \
-       /mnt/rootfs/etc/pki/ca-trust/source/anchors/ \
-    && chmod a-s \
+       /mnt/rootfs/etc/pki/ca-trust/source/anchors/
+    chmod a-s \
        /mnt/rootfs/usr/sbin/* \
-       /mnt/rootfs/usr/libexec/*/* \
-    && rm -rf \
+       /mnt/rootfs/usr/libexec/*/*
+    rm -rf \
        /mnt/rootfs/var/cache/* \
        /mnt/rootfs/var/log/dnf* \
        /mnt/rootfs/var/log/yum.*
+EOR
 
 FROM scratch AS app
 
