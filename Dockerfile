@@ -1,5 +1,5 @@
 FROM quay.io/keycloak/keycloak:26.4.5-0 AS upstream
-FROM ghcr.io/radiorabe/ubi9-minimal:0.10.2 AS builder
+FROM ghcr.io/radiorabe/ubi10-minimal:0.1.1 AS builder
 
 COPY --from=upstream /opt/keycloak /opt/keycloak
 
@@ -26,7 +26,7 @@ RUN <<EOR
 
     mkdir -p /mnt/rootfs
     microdnf install -y \
-           --releasever 9 \
+           --releasever 10 \
            --installroot /mnt/rootfs \
            --nodocs \
            --noplugins \
