@@ -4,7 +4,7 @@ FROM ghcr.io/radiorabe/ubi10-minimal:0.1.1 AS builder
 COPY --from=upstream /opt/keycloak /opt/keycloak
 
 # Theme version, see https://github.com/radiorabe/keycloak-theme-rabe/releases
-ARG THEME_VERSION=0.4.5
+ARG THEME_VERSION=0.4.6
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true
