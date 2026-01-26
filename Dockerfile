@@ -9,6 +9,7 @@ ARG THEME_VERSION=0.4.8
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
+ENV KC_HTTP_RELATIVE_PATH=/auth/
 
 # Configure a database vendor
 ENV KC_DB=postgres
