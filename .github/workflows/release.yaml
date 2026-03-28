@@ -10,7 +10,7 @@ on:
 
 jobs:
   release-container:
-    uses: radiorabe/actions/.github/workflows/release-container.yaml@v0.41.3
+    uses: radiorabe/actions/.github/workflows/release-container.yaml@c7aef9928f610ec51b44f84debf2321189276d54 # v0.41.3
     with:
       image: ghcr.io/radiorabe/keycloak
       name: keycloak
