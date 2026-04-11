@@ -1,4 +1,4 @@
-FROM quay.io/keycloak/keycloak:26.5.6-0 AS upstream
+FROM quay.io/keycloak/keycloak:26.5.7-0 AS upstream
 FROM ghcr.io/radiorabe/ubi10-minimal:0.1.3 AS builder
 
 COPY --from=upstream /opt/keycloak /opt/keycloak
