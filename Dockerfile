@@ -56,6 +56,11 @@ FROM scratch AS app
 COPY --from=builder /mnt/rootfs /
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
+# add env from builder to runtime image
+ENV KC_HEALTH_ENABLED=true
+ENV KC_METRICS_ENABLED=true
+ENV KC_DB=postgres
+
 USER 1000
 
 EXPOSE 8080
