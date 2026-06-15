@@ -10,14 +10,14 @@ on:
 
 jobs:
   release-container:
-    uses: radiorabe/actions/.github/workflows/release-container.yaml@b37e51397726092d8462a2a9b676ea5a5e3a8deb # v0.44.1
+    uses: radiorabe/actions/.github/workflows/release-container.yaml@5dafb461cea1f8b296d89297dc6de7bd0891f0d2 # v0.44.2
     with:
       image: ghcr.io/radiorabe/keycloak
       name: keycloak
       display-name: RaBe Keycloak
       tags: rhel9 keycloak rabe
-      # needs proper multi-stage support of signed keycloak images
-      cosign-verify: false
+      cosign-verify: true
+      cosign-image-skip-regexp: quay.io/keycloak/keycloak
       platforms: "linux/amd64,linux/arm64"
       docker-daemon-config: |
         {
@@ -29,4 +29,4 @@ jobs:
     permissions:
       contents: read
       security-events: write # so zizmor can publish results to the Security tab
-    uses: radiorabe/actions/.github/workflows/test-github-actions.yaml@b37e51397726092d8462a2a9b676ea5a5e3a8deb # v0.44.1
+    uses: radiorabe/actions/.github/workflows/test-github-actions.yaml@5dafb461cea1f8b296d89297dc6de7bd0891f0d2 # v0.44.2
