@@ -1,4 +1,4 @@
-FROM quay.io/keycloak/keycloak:26.6.4-1@sha256:0aae0de7fca85525f727d3354df17896092de8bb26ae4c12d89c77e5df8cbce4 AS upstream
+FROM quay.io/keycloak/keycloak:26.7.0-0@sha256:2eb3cd316835c990e69e26ade292ffa78f6fb0db7d5fc6377463c162e1979ac0 AS upstream
 FROM ghcr.io/radiorabe/ubi10-minimal:0.1.7@sha256:d8303c8a4a9eb4b744b3f18b2db582e8f00622b4151ed57ecdfbba8601959c63 AS builder
 
 COPY --from=upstream /opt/keycloak /opt/keycloak
